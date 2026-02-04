@@ -1,7 +1,12 @@
 @startuml
 'https://plantuml.com/class-diagram
-left to right direction
+' Sistema de Reserva d'Hotels:
+' Volem fer el disseny de casos d'ús d'una aplicació de reserva d'habitacions d'hotel,
+' on els clients poden cercar hotels, fer reserves i cancel·lar-les si és el cas.
+' D'altra banda, els administradors d'hotel poden gestionar les reserves i afegir nous hotels.
+' Important: quan una reserva s'apropa, cal enviar un recordatori de la reserva s'activa.
 
+left to right direction
 actor Client
 actor Administrador
 
@@ -17,6 +22,7 @@ rectangle "Reserva al hotel"{
 Client --> CH
 Client --> RH
 Client --> CR
+Administrador --|> Client
 Administrador --> GR
 Administrador --> ANH
 RH <.. ER : <<extend>>
