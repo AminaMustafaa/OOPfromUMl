@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+left to right direction
+
+actor Client
+actor Administrador
+
+rectangle "Reserva al hotel"{
+    usecase "Cercar hotels" as CH
+    usecase "Reservar Hotel" as RH
+    usecase "Cancelar Reserva" as CR
+    usecase "Gestionar  Reserva" as GR
+    usecase "Afegir Nou Hotel" as ANH
+    usecase "Enviar Recordatori De Reserva" as ER
+}
+
+Client --> CH
+Client --> RH
+Client --> CR
+Administrador --> GR
+Administrador --> ANH
+RH <.. ER : <<extend>>
+
+@enduml
