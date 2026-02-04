@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'Sistema de Venda d'Entrades:
+' Volem fer el disseny de casos d'ús d'una aplicació de venda d'entrades per a concerts, on l’administrador pot
+' afegir nous esdeveniments i gestionar vendes, els usuaris poden cercar esdeveniments i comprar entrades, i els
+' usuari registrats poden veure el seu historial de compres i cancel·lar entrades.
+
+left to right direction
+actor Admin
+actor User
+actor RegisteredUser #lightblue
+
+rectangle "Concert Tickets"{
+    usecase "Add new Event" as UC1
+    usecase "Manage Tickts" as UC2
+    usecase "Search Events" as UC3
+    usecase "Buy Tickets" as UC4
+    usecase "View Ticket History" as UC5
+    usecase "Cancel Tickets" as UC6
+    usecase "Process Payment" as UC7
+}
+
+Admin --> UC1
+Admin  --> UC2
+User --> UC3
+User --> UC4
+RegisteredUser --|> User
+RegisteredUser --> UC5
+RegisteredUser --> UC6
+UC4 ..> UC7 : <<include>>
+
+@enduml

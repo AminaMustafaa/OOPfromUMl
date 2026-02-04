@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+left to right direction
+actor Client
+actor Chef
+actor Delivery_Driver
+
+rectangle "Restaurant Menu"{
+    usecase "Place Order" as UC1
+    usecase "See Pending Order " as UC2
+    usecase "Deliver Order" as UC3
+    usecase "Notify Delivery" as UC4
+    usecase "Select Dish " as UC5
+    usecase "Payment" as UC6
+    usecase "Add Tip" as UC7
+}
+
+Client --> UC1
+Chef  --> UC2
+Delivery_Driver --> UC3
+Delivery_Driver --> UC4
+Client--> UC5
+UC5 ..> UC6 : <<include>>
+UC6 <.. UC7 : <<exclude>>
+
+@enduml
