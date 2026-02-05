@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+header CU Fer comanda (Restaurant)
+
+actor Client
+boundary "App Interfície" as UI
+control "Gestor de Comandes" as Control
+entity "Base de Dades" as DB
+actor Cuiner
+
+== Inici de la Comanda ==
+Client -> UI: Obrir aplicació
+UI --> Client: Mostrar menú
+
+== Seleccionar Plats (<<include>>) ==
+Client -> UI: Seleccionar plats
+UI -> Control: Enviar llista de plats
+Control -> Control: Calcular preu total
+
+== Afegir Propina (<<extend>>) ==
+alt Si el client vol afegir propina
+    Client -> UI: Introduir import propina
+    UI -> Control: Actualitzar total amb propina
+end
+
+== Confirmació i Cuina ==
+Client -> UI: Confirmar comanda
+UI -> Control: Processar pagament i tancament
+Control -> DB: Guardar dades de la comanda
+DB --> Control: Confirmació guardat
+Control -> Cuiner: Notificar nova comanda pendent
+Control --> UI: Mostrar confirmació al Client
+@enduml

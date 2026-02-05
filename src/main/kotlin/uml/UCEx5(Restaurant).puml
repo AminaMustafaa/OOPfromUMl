@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+actor Client
+boundary "interficie"
+control "Gestion de commandes" as Control
+entity "Database" as db
+actor Cuiner
+actor Repartidor
+
+== Fer Commanda ==
+Client -> "Fer Commada"
+
+newpage
+== Veure comandes pendents ==
+
+newpage
+== Lliurar comanda ==
+
+newpage
+== Notificar entrega ==
+@enduml

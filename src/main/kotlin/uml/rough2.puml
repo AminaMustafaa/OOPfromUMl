@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+header Sistema de Comandes Complet (Restaurant)
+
+actor Client
+actor Cuiner
+actor Repartidor
+
+boundary "App Interfície" as UI
+control "Gestor del Sistema" as Control
+entity "Base de Dades" as DB
+
+== 1. Fer Comanda (Client) ==
+Client -> UI: Seleccionar plats (<<include>>)
+UI -> Control: Enviar llista de plats
+Control -> Control: Calcular preu total
+
+alt Afegir Propina (<<extend>>)
+    Client -> UI: Introduir import propina
+    UI -> Control: Actualitzar total
+end
+
+Client -> UI: Confirmar comanda
+UI -> Control: Crear comanda
+Control -> DB: Guardar (Estat: Pendent)
+Control -> Cuiner: Notificar nova comanda
+
+== 2. Preparació (Cuiner) ==
+Cuiner -> UI: Veure comandes pendents
+UI -> Control: Sol·licitar llista
+Control -> DB: Consultar comandes pendents
+DB --> Control: Llista de comandes
+Control --> UI: Mostrar al Cuiner
+
+Cuiner -> UI: Marcar com a "Llista"
+UI -> Control: Canviar estat comanda
+Control -> DB: Actualitzar estat (Estat: Cuinat)
+Control -> Repartidor: Notificar comanda per recollir
+
+== 3. Lliurament (Repartidor) ==
+Repartidor -> UI: Lliurar comanda (Recollida)
+UI -> Control: Iniciar repartiment
+Control -> DB: Actualitzar estat (Estat: En camí)
+
+Repartidor -> UI: Notificar entrega
+UI -> Control: Finalitzar comanda
+Control -> DB: Actualitzar estat (Estat: Entregat)
+Control -> Client: Notificar "Bon profit!"
+@enduml
