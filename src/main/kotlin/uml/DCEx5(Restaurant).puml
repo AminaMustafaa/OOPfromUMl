@@ -6,7 +6,7 @@
 left to right direction
 actor Client
 actor Chef
-actor Delivery_Driver
+actor Delivery_Driver #lightpink
 
 rectangle "Restaurant Menu"{
     usecase "Place Order" as UC1
@@ -20,10 +20,11 @@ rectangle "Restaurant Menu"{
 
 Client --> UC1
 Chef  --> UC2
+UC1 ..> UC5 : <<include>>
+UC1 <.. UC7 : <<exclude>>
+UC5 ..> UC6 : <<include>>
 Delivery_Driver --> UC3
 Delivery_Driver --> UC4
-Client--> UC5
-UC5 ..> UC6 : <<include>>
-UC6 <.. UC7 : <<exclude>>
+
 
 @enduml
